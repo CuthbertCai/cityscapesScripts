@@ -7,7 +7,7 @@
 #   a) *color.png             : the class is encoded by its color
 #   b) *labelIds.png          : the class is encoded by its ID
 #   c) *instanceIds.png       : the class and the instance are encoded by an instance ID
-# 
+#
 # With this tool, you can generate option
 #   d) *labelTrainIds.png     : the class is encoded by its training ID
 # This encoding might come handy for training purposes. You can use
@@ -34,20 +34,20 @@ def main():
     if 'CITYSCAPES_DATASET' in os.environ:
         cityscapesPath = os.environ['CITYSCAPES_DATASET']
     else:
-        cityscapesPath = os.path.join(os.path.dirname(os.path.realpath(__file__)),'..','..')
+        cityscapesPath = os.path.join(os.path.dirname(os.path.realpath(__file__)),'..','..','..','datasets','cityspaces')
     # how to search for all ground truth
     searchFine   = os.path.join( cityscapesPath , "gtFine"   , "*" , "*" , "*_gt*_polygons.json" )
-    searchCoarse = os.path.join( cityscapesPath , "gtCoarse" , "*" , "*" , "*_gt*_polygons.json" )
+    #searchCoarse = os.path.join( cityscapesPath , "gtCoarse" , "*" , "*" , "*_gt*_polygons.json" )
 
     # search files
     filesFine = glob.glob( searchFine )
     filesFine.sort()
-    filesCoarse = glob.glob( searchCoarse )
-    filesCoarse.sort()
+    #filesCoarse = glob.glob( searchCoarse )
+    #filesCoarse.sort()
 
     # concatenate fine and coarse
-    files = filesFine + filesCoarse
-    # files = filesFine # use this line if fine is enough for now.
+    #files = filesFine + filesCoarse
+    files = filesFine # use this line if fine is enough for now.
 
     # quit if we did not find anything
     if not files:
