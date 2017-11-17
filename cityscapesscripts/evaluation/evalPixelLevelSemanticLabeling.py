@@ -4,8 +4,8 @@
 # We use this script to evaluate your approach on the test set.
 # You can use the script to evaluate on the validation set.
 #
-# Please check the description of the "getPrediction" method below 
-# and set the required environment variables as needed, such that 
+# Please check the description of the "getPrediction" method below
+# and set the required environment variables as needed, such that
 # this script can locate your results.
 # If the default implementation of the method works, then it's most likely
 # that our evaluation server will be able to process your results as well.
@@ -75,7 +75,7 @@ def getPrediction( args, groundTruthFile ):
         elif 'CITYSCAPES_DATASET' in os.environ:
             rootPath = os.path.join( os.environ['CITYSCAPES_DATASET'] , "results" )
         else:
-            rootPath = os.path.join(os.path.dirname(os.path.realpath(__file__)),'..','..','results')
+            rootPath = os.path.join(os.path.dirname(os.path.realpath(__file__)),'..','..','..','results')
 
         if not os.path.isdir(rootPath):
             printError("Could not find a result root folder. Please read the instructions of this method.")
@@ -121,7 +121,7 @@ args = CArgs()
 if 'CITYSCAPES_DATASET' in os.environ:
     args.cityscapesPath = os.environ['CITYSCAPES_DATASET']
 else:
-    args.cityscapesPath = os.path.join(os.path.dirname(os.path.realpath(__file__)),'..','..')
+    args.cityscapesPath = os.path.join(os.path.dirname(os.path.realpath(__file__)),'..','..','..','datasets','cityspaces')
 
 if 'CITYSCAPES_EXPORT_DIR' in os.environ:
     export_dir = os.environ['CITYSCAPES_EXPORT_DIR']
@@ -659,7 +659,8 @@ def main(argv):
             elif ("pred" in arg):
                 predictionImgList.append(arg)
     # however the no-argument way is prefered
-    elif len(argv) == 0:
+    elif len(argv) == 1:
+        args.groundTruthSearch  = os.path.join( args.cityscapesPath , "gtFine" , argv[0] , "*", "*_gtFine_labelIds.png" )
         # use the ground truth search string specified above
         groundTruthImgList = glob.glob(args.groundTruthSearch)
         if not groundTruthImgList:
@@ -670,7 +671,6 @@ def main(argv):
 
     # evaluate
     evaluateImgLists(predictionImgList, groundTruthImgList, args)
-
     return
 
 # call the main method
