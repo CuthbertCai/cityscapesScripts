@@ -34,7 +34,7 @@ def main():
     if 'CITYSCAPES_DATASET' in os.environ:
         cityscapesPath = os.environ['CITYSCAPES_DATASET']
     else:
-        cityscapesPath = os.path.join(os.path.dirname(os.path.realpath(__file__)),'..','..','..','datasets','cityspaces')
+        cityscapesPath = os.path.join(os.path.dirname(os.path.realpath(__file__)),'..','..','..','datasets','cityscapes')
     # how to search for all ground truth
     searchFine   = os.path.join( cityscapesPath , "gtFine"   , "*" , "*" , "*_gt*_polygons.json" )
     #searchCoarse = os.path.join( cityscapesPath , "gtCoarse" , "*" , "*" , "*_gt*_polygons.json" )
